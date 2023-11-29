@@ -1,8 +1,11 @@
 import logging
-from flair.data import Sentence
-from .baseEmbedder import BaseEmbedding
-from flair.embeddings import TransformerDocumentEmbeddings
 from typing import List
+
+from flair.data import Sentence
+from flair.embeddings import TransformerDocumentEmbeddings
+
+from .baseEmbedder import BaseEmbedding
+
 
 class FlairEncoder(BaseEmbedding):
     """
@@ -10,7 +13,6 @@ class FlairEncoder(BaseEmbedding):
 
     Attributes:
         model_name (str): The name of the pre-trained model to be used for encoding.
-
     Methods:
         get_embedding(text): Returns the embedding representation of the given text.
     """
@@ -32,5 +34,5 @@ class FlairEncoder(BaseEmbedding):
     def _embed_text(self, text: str):
         sentence = Sentence(text)
         self.model.embed(sentence)
-        
+
         return sentence.get_embedding().detach().cpu().numpy()

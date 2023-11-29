@@ -1,8 +1,10 @@
 import numpy as np
-from .baseEmbedder import BaseEmbedding
+from sentence_transformers import SentenceTransformer as SBERT
 from torch.nn import Linear
 from torch.quantization import quantize_dynamic
-from sentence_transformers import SentenceTransformer as SBERT
+
+from .baseEmbedder import BaseEmbedding
+
 
 class SentenceEncoder(BaseEmbedding):
     """
@@ -16,9 +18,14 @@ class SentenceEncoder(BaseEmbedding):
         quantize: turns on quantization
         num_threads: number of treads for pytorch to use, only affects when device=cpu
 
-    """    
+    """
 
-    def __init__(self, model_name: str = "all-MiniLM-L6-v2", quantize:bool = False, num_threads: int = None):
+    def __init__(
+        self,
+        model_name: str = "all-MiniLM-L6-v2",
+        quantize: bool = False,
+        num_threads: int = None,
+    ):
         super().__init__()
         self.model_name = model_name
         self.model = SBERT(model_name, device=self.device)
@@ -32,7 +39,6 @@ class SentenceEncoder(BaseEmbedding):
                 self.device.set_num_threads(num_threads)
 
     def get_embedding(self, text):
-
         embeddings = self.model.encode(text)
 
         return np.array(embeddings)
