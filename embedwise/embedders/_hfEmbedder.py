@@ -3,6 +3,7 @@ from .baseEmbedder import BaseEmbedding
 from transformers import AutoModel, AutoTokenizer
 from typing import List
 
+
 class HuggingFaceEncoder(BaseEmbedding):
     """
     A class that represents a Hugging Face encoder for text embedding.
@@ -15,10 +16,12 @@ class HuggingFaceEncoder(BaseEmbedding):
 
     """
 
-    def __init__(self, model_name):
+    def __init__(self, model_name: str):
         super().__init__()
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name).to(self.device)
+        self.logger.info(f"Loaded model {model_name} on device {self.device}")
+
 
     def get_embedding(self, text: str | List[str]):
         """
@@ -49,6 +52,6 @@ class HuggingFaceEncoder(BaseEmbedding):
 
             return embeddings.cpu().numpy()
         except Exception as e:
-            print(e)
+            self.logger.error(f"Error in get_embedding: {e}")
             return None
         
