@@ -7,7 +7,7 @@ class _HFEmbedder(BaseEmbeddingclass):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name).to(self.device)
 
-    def _generate_document_embedding(self, text):
+    # def _generate_document_embedding(self, text):
         
 
     def get_embedding(self, text):
