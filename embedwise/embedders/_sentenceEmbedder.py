@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 from .baseEmbedder import BaseEmbedding
 from torch.nn import Linear
 from torch.quantization import quantize_dynamic
@@ -16,10 +16,9 @@ class SentenceEncoder(BaseEmbedding):
         quantize: turns on quantization
         num_threads: number of treads for pytorch to use, only affects when device=cpu
 
-    """
-    def __init__(
-        self, name="all-MiniLM-L6-v2", quantize=False, num_threads=None
-    ):
+    """    
+
+    def __init__(self, name="all-MiniLM-L6-v2", quantize=False, num_threads=None):
         super().__init__()
         self.name = name
         self.model = SBERT(name, device=self.device)
@@ -31,13 +30,8 @@ class SentenceEncoder(BaseEmbedding):
             if self.device.type == "cpu":
                 self.device.set_num_threads(num_threads)
 
-    def transform(self, X, y=None):
-        """Transforms the text into a numeric representation."""
-        # Convert pd.Series objects to encode compatable
-        if isinstance(X, pd.Series):
-            X = X.to_numpy()
+    def get_embedding(self, text):
 
-        return self.model.encode(X)
-    
-    def get_embedding(self, text: str | list[str]):
-        return self.model.encode(text)
+        embeddings = self.model.encode(text)
+        
+        return np.array(embeddings)

@@ -1067,6 +1067,16 @@ files = [
 six = "*"
 
 [[package]]
+name = "logger"
+version = "1.4"
+description = "Python logging helper"
+optional = false
+python-versions = "*"
+files = [
+    {file = "logger-1.4.tar.gz", hash = "sha256:4ecac57133c6376fa215f0fe6b4dc4d60e4d1ad8be005cab4e8a702df682f8b3"},
+]
+
+[[package]]
 name = "lxml"
 version = "4.9.3"
 description = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
@@ -3286,4 +3296,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10,<3.13"
-content-hash = "1b7ef50194d285ddbb9c651aa411030da81e21b09d04f8f2ab529ff0bb678999"
+content-hash = "2694882d954a7c5824df253004581a107cff588f85080a4b3c2bb46411c72eb8"
