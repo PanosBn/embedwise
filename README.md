@@ -16,7 +16,7 @@ Ensure Python 3.10 or later is installed, along with Poetry. Spawning a virtual 
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/EmbedWise.git
+git clone https://github.com/PanosBn/EmbedWise.git
 cd EmbedWise
 
 # Install with poetry
